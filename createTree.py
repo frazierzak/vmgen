@@ -1,11 +1,21 @@
 import os, glob, re # Imports python modules
+from configparser import ConfigParser
 
-cwd = os.path.dirname(os.path.realpath(__file__)) # Grabs current working directory
-cwd = cwd + '\BattleTech_Data\StreamingAssets\data\**\**' # Appends data path plus wildcards to current directory
+def generate_data_file_list(battletech_home):
+    streaming_assets = os.path.join(battletech_home, 'BattleTech_Data', 'StreamingAssets')
+    data_directory = os.path.join(streaming_assets, 'data')
+    files = [os.path.join(os.path.relpath(directory_path, streaming_assets), filename) for directory_path, directory_names, filenames in os.walk(data_directory) for filename in filenames]
+    files.sort()
+    return files
 
-files = glob.glob (cwd, recursive=True) # Creates file tree
-files = [re.sub(r'.*StreamingAssets\\', '', eachfile) for eachfile in files] # Removes folder path up to data\
-files = filter(None, files) #Removes blanks lines
+def write_file_list(filename, filelist):
+    with open(filename, 'w') as file:
+        for filename in filelist:
+            file.write(filename+'\n')
 
-with open ('defaultTree.txt', 'w') as in_files: # Creates defaultTree.txt
-    for eachfile in files: in_files.write(eachfile+'\n') # Writes each array from files into seperate lines in defaultTree.txt
+if __name__ == "__main__":
+    config = ConfigParser()
+    config.read('config.ini')
+    battletech_home = config.get('directories', 'battletech_home')
+    data_filelist = generate_data_file_list(battletech_home)
+    write_file_list('defaultTree.txt', data_filelist)

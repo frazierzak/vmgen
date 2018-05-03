@@ -2,10 +2,10 @@
 VersionManifest.csv generator for Battletech (2018) PC Game. Helps those who mod their game quickly generate the CSV file needed to load files.
 
 1. Clone or Download my github files
-2. Extract compareTree.py, defaultManifest.csv, and defaultTree.txt to your root Battletech folder. 
+2. Edit config.ini to point to your root Battletech folder.
 3. [Install Python 3.6](https://www.python.org/downloads/)! (this won't be required in the future once I compile)
 4. Run compareTree.py
-5. Copy VersionManifest.csv from your root Battletech folder to your BATTLETECH\BattleTech_Data\StreamingAssets\data folder and overwrite
+5. Copy VersionManifest.csv from the location you ran compareTree.py from to your BATTLETECH\BattleTech_Data\StreamingAssets\data folder and overwrite
 
 How it works
 
