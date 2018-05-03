@@ -127,7 +127,7 @@ def write_new_manifest(new_manifest_lines):
     for new_line in new_manifest_lines:
         new_manifest.write(new_line)
         new_manifest.write('\n')
-    new_manifest.write(',')
+    new_manifest.write(',\n')
     new_manifest.close()
 
 
