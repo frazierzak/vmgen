@@ -12,7 +12,7 @@ from configparser import ConfigParser
 """
 Mapping for File Extensions
 """
-file_type_map = {
+file_extension_map = {
     ".png": "",
     ".dds": "",
     ".json": "",
@@ -25,7 +25,7 @@ file_type_map = {
 """
 Mapping for File Categories
 """
-file_cat_map = {
+file_category_map = {
     "\\Prefabs\\": "Prefab",
     "\\Moods\\": "MoodSettings",
     "\\Sprites\\": "Sprite",
@@ -85,7 +85,7 @@ file_cat_map = {
 returns FileType (extension) from file_type_map
 """
 def get_file_type(file_path):
-    for key, value in file_type_map.items():
+    for key, value in file_extension_map.items():
         if key in file_path:
             return value
     return "ERROR: TYPE NOT DEFINED!"
@@ -94,11 +94,11 @@ def get_file_type(file_path):
 """
 returns the FileCat (category) from the file_cat_map
 """
-def get_file_cat(file_path):
-    for key, value in file_cat_map.items():
+def get_file_category(file_path):
+    for key, value in file_category_map.items():
         if key in file_path:
             return value
-    return "ERROR: CAT NOT DEFINED!"
+    return "ERROR: CATEGORY NOT DEFINED!"
 
 
 """
@@ -140,7 +140,7 @@ def get_new_manifest_lines(added_files):
         fileID = os.path.basename(added_file_path)
         fileID = os.path.splitext(fileID)[0]
         fileType = get_file_type(added_file_path)
-        fileCat = get_file_cat(added_file_path)
+        fileCat = get_file_category(added_file_path)
         fileDate = str(datetime.datetime.now().isoformat()) + "Z"
         fileDate = fileDate.replace(' ', '-')
         new_manifest_line = "{0},{1},{2},8,{3},{3},,,False,0,False".format(fileID, fileType, added_file_path, fileDate)
