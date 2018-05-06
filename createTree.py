@@ -3,7 +3,8 @@ from configparser import ConfigParser
 
 def generate_data_file_list(battletech_home):
     streaming_assets = os.path.join(battletech_home, 'BattleTech_Data', 'StreamingAssets')
-    data_directory = os.path.join(streaming_assets, 'data')
+    data_directory = os.path.join(streaming_assets, 'data') #This needs to be stepped back to just StreamingAssets
+    #Not sure how the below line works so I can't change it without breaking things.
     files = [os.path.join(os.path.relpath(directory_path, streaming_assets), filename) for directory_path, directory_names, filenames in os.walk(data_directory) for filename in filenames]
     files.sort()
     return files
