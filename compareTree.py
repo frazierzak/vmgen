@@ -101,7 +101,7 @@ def get_added_file_list():
     current_files = createTree.generate_data_file_list(battletech_home)
 
     # not sure about how efficient this is, maybe a list comprehension could be faster?
-    added_files = [file for file in current_files if file not in default_files]
+    added_files = [file.replace(os.path.sep, '/') for file in current_files if file not in default_files]
     # something like added_files = [file for file in current_files if file not in default_files]
     # Removes blanks lines : unsure if needed with list comprehension / refactored file list reading code
     added_files = filter(None, added_files)
